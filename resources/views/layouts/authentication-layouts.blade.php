@@ -56,8 +56,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 </a>
                 <!--end::Aside header-->
                 <!--begin::Aside title-->
-                <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">Discover Amazing Metronic
-                    <br />with great build tools</h3>
+                <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">Sistem Informasi
+                    <br />Perpustakaan</h3>
                 <!--end::Aside title-->
             </div>
             <!--end::Aside Top-->
@@ -78,7 +78,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <!--begin::Title-->
                         <div class="pb-13 pt-lg-0 pt-5">
                             <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Sign Up</h3>
-                            <p class="text-muted font-weight-bold font-size-h4">Enter your details to create your account</p>
+                            <p class="text-muted font-weight-bold font-size-h4">Masukkan Data untuk Pengguna Baru</p>
                         </div>
                         <!--end::Title-->
                         <!--begin::Form group-->
@@ -151,12 +151,8 @@ License: You must have a valid license purchased only from themeforest(the above
             <!--begin::Content footer-->
             <div class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0">
                 <div class="text-dark-50 font-size-lg font-weight-bolder mr-10">
-                    <span class="mr-1">2021©</span>
-                    <a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">Keenthemes</a>
+                    <span class="mr-1">{{date_format(now(), 'Y')}}©</span>
                 </div>
-                <a href="#" class="text-primary font-weight-bolder font-size-lg">Terms</a>
-                <a href="#" class="text-primary ml-5 font-weight-bolder font-size-lg">Plans</a>
-                <a href="#" class="text-primary ml-5 font-weight-bolder font-size-lg">Contact Us</a>
             </div>
             <!--end::Content footer-->
         </div>

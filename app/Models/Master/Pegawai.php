@@ -2,6 +2,7 @@
 
 namespace App\Models\Master;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,4 +23,9 @@ class Pegawai extends Model
         'alamat',
         'keterangan',
     ];
+
+    public function users()
+    {
+        return $this->morphOne(User::class, 'userable', 'userable_type', 'userable_id');
+    }
 }

@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label class="checkbox mb-0">
                     <div class="ml-2">
-                        <a href="{{ route('login') }}">Already registered?</a>.</div>
+                        <a href="{{ route('login') }}">Already registered?</a></div>
                 </label>
             </div>
             <!--end::Form group-->

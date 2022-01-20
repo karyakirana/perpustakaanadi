@@ -23,6 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'userable_type',
+        'userable_id',
     ];
 
     /**
@@ -43,4 +45,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relation morph
+    public function userable()
+    {
+        return $this->morphTo(__FUNCTION__, 'userable_type', 'userable_id');
+    }
 }
