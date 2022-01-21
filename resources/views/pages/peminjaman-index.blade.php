@@ -1,3 +1,3 @@
 <x-metronics-layout>
-    <livewire:master.peminjam-form />
+    <livewire:transaksi.peminjaman-buku-list />
 </x-metronics-layout>

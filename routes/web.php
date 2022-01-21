@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function (){
 
     // dashboard
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard/peminjam', [\App\Http\Controllers\DashboardController::class, 'siswa'])->name('dashboard.peminjam');
+    Route::get('dashboard/guest', [\App\Http\Controllers\DashboardController::class, 'siswaNonApproved'])->name('dashboard.peminjam.nonapproved');
 
     Route::get('master/pegawai', [\App\Http\Controllers\Master\PegawaiController::class, 'index'])->name('pegawai');
     Route::get('master/peminjam', [\App\Http\Controllers\Master\PeminjamController::class, 'index'])->name('peminjam');
@@ -49,7 +51,7 @@ Route::post('/login', [\App\Http\Controllers\Custom\AuthController::class, 'sign
 Route::get('/register', [\App\Http\Controllers\Custom\AuthController::class, 'create'])->name('register');
 Route::post('/register', [\App\Http\Controllers\Custom\AuthController::class, 'register']);
 
-Route::post('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])
+Route::get('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 

@@ -2,7 +2,7 @@
     <!--begin::Brand-->
     <div class="brand flex-column-auto" id="kt_brand">
         <!--begin::Logo-->
-        <a href="{{url('/')}}" class="brand-logo">
+        <a href="{{url('/dashboard')}}" class="brand-logo">
             <img alt="Logo" src="/assets/media/logos/logo-light.png" />
         </a>
         <!--end::Logo-->
