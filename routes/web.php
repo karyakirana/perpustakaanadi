@@ -23,6 +23,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('master/pegawai', [\App\Http\Controllers\Master\PegawaiController::class, 'index'])->name('pegawai');
+    Route::get('master/peminjam', [\App\Http\Controllers\Master\PeminjamController::class, 'index'])->name('peminjam');
+    Route::get('master/peminjam/nonapproved', [\App\Http\Controllers\Master\PeminjamController::class, 'indexNonApproved'])->name('peminjam.nonapproved');
     Route::get('master/buku/kategori', \App\Http\Livewire\Master\BukuKategori::class);
     Route::get('master/buku', \App\Http\Livewire\Master\Buku::class);
     Route::get('transaksi/buku/stock', \App\Http\Livewire\Stock\BukuStockLivewire::class);
@@ -52,4 +54,4 @@ Route::post('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionControlle
     ->name('logout');
 
 //require __DIR__.'/auth.php';
-require __DIR__.'/master.php';
+//require __DIR__.'/master.php';

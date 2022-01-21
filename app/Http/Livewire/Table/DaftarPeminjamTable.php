@@ -10,10 +10,22 @@ use App\Models\Master\Peminjam;
 class DaftarPeminjamTable extends DataTableComponent
 {
 
+    protected $listeners =['refreshPeminjamTable'=>'$refresh'];
+
     public function columns(): array
     {
         return [
-            Column::make('Column Name'),
+            Column::make('ID', 'kode_peminjam')
+                ->searchable()
+                ->sortable(),
+            Column::make('Nama')
+                ->searchable()
+                ->sortable(),
+            Column::make('Gender')
+                ->sortable(),
+            Column::make('Email'),
+            Column::make('Telepon'),
+            Column::make(''),
         ];
     }
 

@@ -77,7 +77,7 @@ class PegawaiForm extends Component
                     'id'=>$this->pegawai_id
                 ],
                 [
-                    'kode'=> $this->kode(),
+                    'kode'=> $this->kode ?? $this->kode(),
                     'nama'=>$this->nama,
                     'gender'=>$this->gender,
                     'jenis_pengenal'=>$this->jenis_pengenal,
@@ -141,7 +141,6 @@ class PegawaiForm extends Component
     {
         $pegawai = Pegawai::query()->find($this->pegawai_id);
         $users = $pegawai->users();
-//        dd($pegawai->users->id);
 
         if ($users->count() == 0)
         {

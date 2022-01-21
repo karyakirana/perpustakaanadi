@@ -30,6 +30,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role == 'admin';
         });
 
+        Gate::define('pegawai', function ($user){
+            return count(array_intersect(['admin', 'pegawai'],[$user->role]) );
+        });
+
         Gate::define('guest', function ($user){
             return $user->role == 'guest';
         });

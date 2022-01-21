@@ -15,7 +15,7 @@ class DaftarPegawaiTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('ID')
+            Column::make('ID', 'kode')
                 ->searchable()
                 ->sortable(),
             Column::make('Nama')

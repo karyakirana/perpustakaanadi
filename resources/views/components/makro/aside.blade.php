@@ -81,6 +81,22 @@
                                     <span class="menu-text">Pegawai</span>
                                 </a>
                             </li>
+                            <li class="menu-item menu-item-submenu {{ (request()->is('master/peminjam')) ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="/master/peminjam" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Peminjam</span>
+                                </a>
+                            </li>
+                            <li class="menu-item menu-item-submenu {{ (request()->is('master/peminjam/nonapproved')) ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="/master/peminjam/nonapproved" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-line">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Peminjam Non Approve</span>
+                                </a>
+                            </li>
                             <li class="menu-item menu-item-submenu {{ (request()->is('master/buku/kategori')) ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="/master/buku/kategori" class="menu-link menu-toggle">
                                     <i class="menu-bullet menu-bullet-line">
