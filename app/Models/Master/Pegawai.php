@@ -24,6 +24,11 @@ class Pegawai extends Model
         'keterangan',
     ];
 
+    public function getLastNumKodeAttribute()
+    {
+        return substr($this->kode, 1, 5);
+    }
+
     public function users()
     {
         return $this->morphOne(User::class, 'userable', 'userable_type', 'userable_id');

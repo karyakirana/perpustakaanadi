@@ -17,12 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 Route::middleware(['auth'])->group(function (){
-    Route::get('master/pegawai', \App\Http\Livewire\PegawaiController::class);
+
+    // dashboard
+    Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('master/pegawai', [\App\Http\Controllers\Master\PegawaiController::class, 'index'])->name('pegawai');
     Route::get('master/buku/kategori', \App\Http\Livewire\Master\BukuKategori::class);
     Route::get('master/buku', \App\Http\Livewire\Master\Buku::class);
     Route::get('transaksi/buku/stock', \App\Http\Livewire\Stock\BukuStockLivewire::class);

@@ -9,7 +9,7 @@ class PegawaiController extends Controller
 {
     public function index()
     {
-        // daftar petugas
+        return view('pages.pegawai-index');
     }
     public function datatables()
     {
