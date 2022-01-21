@@ -64,18 +64,18 @@
         </x-slot>
     </x-mikro.modal-large>
 
-    <x-mikro.modal-large id="usersModal" :title="__('Password and Role')">
+    <x-mikro.modal-large id="usersModal" :title="__('Password and Role')" wire:ignore.self>
         <form id="formUsers">
             <div class="form-group row">
                 <label class="col-form-label col-3">Username</label>
                 <div class="col-8">
-                    <x-atom.input :name="__('password')"  wire:model.defer="username" />
+                    <x-atom.input :name="__('username')"  wire:model.defer="username" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-form-label col-3">Role</label>
                 <div class="col-8">
-                    <select id="role" class="form-control @error('role') is-invalid @enderror">
+                    <select id="role" class="form-control @error('role') is-invalid @enderror" wire:model.defer="role">
                         <option>Dipilih</option>
                         <option value="guest">Tamu</option>
                         <option value="pegawai">Pegawai</option>
@@ -87,16 +87,20 @@
             <div class="form-group row">
                 <label class="col-form-label col-3">Password</label>
                 <div class="col-8">
-                    <x-atom.input :name="__('password')" type="password"  wire:model.defer="password" />
+                    <x-atom.input :name="__('password')" :type="__('password')"  wire:model.defer="password" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-form-label col-3">Password Confirmation</label>
                 <div class="col-8">
-                    <x-atom.input :name="__('password_confirmation')" type="password"  wire:model.defer="password_confirmation" />
+                    <x-atom.input :name="__('password_confirmation')" :type="__('password')"  wire:model.defer="password_confirmation" />
                 </div>
             </div>
         </form>
+        <x-slot name="footer">
+            <button class="btn btn-warning " data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" wire:click="storeUsers">Simpan</button>
+        </x-slot>
     </x-mikro.modal-large>
 
     @push('scripts')
@@ -111,6 +115,14 @@
 
             $('#pegawaiModal').on('hidden.bs.modal', function (e){
                 Livewire.emit('resetForm')
+            })
+
+            Livewire.on('showUsersModal', function (){
+                $('#usersModal').modal('show')
+            })
+
+            Livewire.on('hideUsersModal', function (){
+                $('#usersModal').modal('hide')
             })
         </script>
     @endpush

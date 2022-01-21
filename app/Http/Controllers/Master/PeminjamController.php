@@ -14,28 +14,13 @@ class PeminjamController extends Controller
         return view('pages.peminjaman-index');
     }
 
-    public function datatables()
+    public function indexNonApproved()
     {
-        // daftar datatables peminjam approved
-        $data = Peminjam::query()
-            ->latest('kode')->get();
-        return DataTables::of($data)
-            ->addColumn('actions', function ($item){
-                $edit = '<button></button>';
-                $delete = '';
-                return $edit.$delete;
-            })
-            ->rawColumns(['actions'])
-            ->make('true');
+        return view('pages.dashboard-user-nonapproved');
     }
 
     public function create()
     {
         // approval users
-    }
-
-    public function datatablesNonApproved()
-    {
-        // daftar datatables peminjam semua
     }
 }

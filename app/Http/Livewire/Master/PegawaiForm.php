@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Master;
 
 use App\Models\Master\Pegawai;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Livewire\Component;
@@ -13,7 +14,9 @@ class PegawaiForm extends Component
     // listener
     protected $listeners = [
         'resetForm'=>'resetForm',
-        'edit'=>'edit'
+        'edit'=>'edit',
+        'setUsers'=>'setUsers',
+        'destroy'=>'destroy',
     ];
 
     // for pegawai table
@@ -87,6 +90,17 @@ class PegawaiForm extends Component
                     'keterangan'=>$this->keterangan,
                 ]
             );
+
+        if ($this->pegawai_id)
+        {
+            $pegawai = Pegawai::query()->find($this->pegawai_id);
+            $users = $pegawai->users();
+            if ($users->exists()){
+                $users->update([
+                    'email'=>$this->email
+                ]);
+            }
+        }
         $this->resetForm();
         $this->emit('hidePegawaiModal');
         $this->emit('refreshPegawaiTable');
@@ -107,55 +121,80 @@ class PegawaiForm extends Component
         $this->alamat = $pegawai->alamat;
         $this->keterangan = $pegawai->keterangan;
         $this->emit('showPegawaiModal');
+        $this->emit('refreshPegawaiTable');
     }
 
     public function setUsers($id)
     {
         $this->pegawai_id = $id;
-        $this->emit('showPasswordModal');
+        $pegawai = Pegawai::query()->find($id);
+        if ($pegawai->users()->count() > 0)
+        {
+            $users = $pegawai->users;
+            $this->username = $users->username;
+            $this->role = $users->role;
+        }
+        $this->emit('showUsersModal');
     }
 
     public function storeUsers()
     {
         $pegawai = Pegawai::query()->find($this->pegawai_id);
         $users = $pegawai->users();
+//        dd($pegawai->users->id);
 
-        if ($users->doesntExist())
+        if ($users->count() == 0)
         {
             $this->validate([
-                'username'=>'required|unique:user.username',
+                'username'=>['required', Rule::unique('users','username')],
                 'role'=>'required',
-                'password'=>['required|confirmed',Rules\Password::defaults()]
+                'password'=>['required']
             ]);
 
             $users->create([
-                'name'=>$pegawai->name,
+                'name'=>$pegawai->nama,
                 'username'=>$this->username,
                 'email'=>$pegawai->email,
-                'password'=>$this->password,
+                'password'=>Hash::make($this->password),
                 'role'=>$this->role,
             ]);
         }
         else
         {
             $this->validate([
-                'username'=>['required', Rule::unique('user','username')->ignore($users->id)],
+                'username'=>['required', Rule::unique('users','username')->ignore($pegawai->users->id)],
                 'role'=>'required',
-                'password'=>['confirmed',Rules\Password::defaults()]
             ]);
 
-            $users->update([
-                'username'=>$this->username,
-                'password'=>$this->password,
-                'role'=>$this->role,
-            ]);
+            if ($this->password){
+                $users->update([
+                    'username'=>$this->username,
+                    'password'=>Hash::make($this->password),
+                    'role'=>$this->role,
+                ]);
+            } else {
+                $users->update([
+                    'username'=>$this->username,
+                    'role'=>$this->role,
+                ]);
+            }
+
         }
+        $this->reset(['pegawai_id', 'password', 'password_confirmation', 'username', 'role']);
 
-        $this->emit('hidePasswordModal');
+        $this->emit('hideUsersModal');
+    }
+
+    public function destroy($id)
+    {
+        $pegawai = Pegawai::query()->find($id);
+        $pegawai->users()->delete();
+        $pegawai->delete();
+        $this->emit('refreshPegawaiTable');
     }
 
     public function updateUsers()
     {
-        $this->emit('hidepasswordModal');
+        $this->emit('hideUsersModal');
     }
 }
