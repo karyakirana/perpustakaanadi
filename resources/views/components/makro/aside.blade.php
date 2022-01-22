@@ -98,7 +98,6 @@
                                     <span class="menu-text">Peminjam Non Approve</span>
                                 </a>
                             </li>
-                            @endcan
                             <li class="menu-item menu-item-submenu {{ (request()->is('master/buku/kategori')) ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="/master/buku/kategori" class="menu-link menu-toggle">
                                     <i class="menu-bullet menu-bullet-line">
@@ -108,6 +107,7 @@
                                     <i class="menu-arrow"></i>
                                 </a>
                             </li>
+                            @endcan
                             <li class="menu-item menu-item-submenu {{ (request()->is('master/buku')) ? 'menu-item-active' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="/master/buku" class="menu-link menu-toggle">
                                     <i class="menu-bullet menu-bullet-line">

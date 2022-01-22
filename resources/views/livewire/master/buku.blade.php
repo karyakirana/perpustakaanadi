@@ -22,7 +22,7 @@
                             <th class="text-center italic" >Judul</th>
                             <th class="text-center italic" >Harga Sewa</th>
                             <th class="text-center italic" >Keterangan</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center"></th>
                             </thead>
                         </tr>
                         @forelse($databuku as $row)
@@ -36,10 +36,12 @@
                                 <td class="text-center italic" >{{$row->harga_sewa}}</td>
                                 <td class="text-center italic" >{{$row->keterangan}}</td>
                                 <td class="text-center">
+                                    @can('pegawai')
                                     <a href="#" wire:click="edit({{$row->id}})" class="btn btn-sm btn-text-primary btn-hover-primary btn-icon flaticon2-pen" title="edit">
                                     </a>
                                     <a href="#" wire:click="removeData({{$row->id}})" class="btn btn-sm btn-text-danger btn-icon btn-hover-danger ki ki-solid-minus">
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                         @empty
