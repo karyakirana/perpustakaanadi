@@ -16,4 +16,9 @@ class PeminjamanBukuController extends Controller
     {
         return view('pages.peminjaman-transaksi');
     }
+
+    public function approved()
+    {
+        //
+    }
 }
