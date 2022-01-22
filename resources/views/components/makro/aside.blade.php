@@ -175,6 +175,7 @@
                         </ul>
                     </div>
                 </li>
+                @can('pegawai')
                 <li class="menu-item menu-item-submenu {{ (request()->is('manajemen/*')) ? 'menu-item-open menu-item-here' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
 										<span class="svg-icon menu-icon">
@@ -226,6 +227,7 @@
                         </ul>
                     </div>
                 </li>
+                @endcan
             </ul>
             <!--end::Menu Nav-->
         </div>
