@@ -20,7 +20,6 @@
                             <th class="text-center italic" >Penulis</th>
                             <th class="text-center italic" >ISBN</th>
                             <th class="text-center italic" >Judul</th>
-                            <th class="text-center italic" >Harga Sewa</th>
                             <th class="text-center italic" >Keterangan</th>
                             <th class="text-center"></th>
                             </thead>
@@ -33,7 +32,6 @@
                                 <td class="text-center italic" >{{$row->penulis}}</td>
                                 <td class="text-center italic" >{{$row->isbn}}</td>
                                 <td class="text-center italic" >{{$row->judul}}</td>
-                                <td class="text-center italic" >{{$row->harga_sewa}}</td>
                                 <td class="text-center italic" >{{$row->keterangan}}</td>
                                 <td class="text-center">
                                     @can('pegawai')
