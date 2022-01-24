@@ -4,7 +4,9 @@
             <div class="card-title">Buku</div>
             <div class="card-toolbar">
                 <div class="card-toolbar">
+                    @can('pegawai')
                     <button class="btn btn-primary" type="button" onclick="adddata()">New Add</button>
+                    @endcan
                 </div>
             </div>
         </div>
