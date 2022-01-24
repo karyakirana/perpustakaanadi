@@ -43,10 +43,12 @@ class DashboardController extends Controller
             'jumlah_peminjam'=>Peminjam::query()->count(),
             'peminjaman'=>Peminjaman::query()
                 ->with(['peminjamPerson'])
+                ->where('user_id', Auth::id())
                 ->latest('kode_peminjaman')
                 ->limit(10)->get(),
             'pengembalian'=>Pengembalian::query()
                 ->with(['peminjamPerson'])
+                ->where('user_id', Auth::id())
                 ->latest('kode_pengembalian')
                 ->limit(10)->get(),
 
