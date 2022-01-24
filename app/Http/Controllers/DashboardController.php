@@ -18,7 +18,20 @@ class DashboardController extends Controller
         if (Auth::user()->role != 'pegawai'){
             return redirect()->to('dashboard/'.Auth::user()->role);
         }
-        return view('pages.dashboard');
+        return view('pages.dashboard', [
+            'jumlah_koleksi_buku'=>Buku::query()->count(),
+            'jumlah_pegawai'=>Pegawai::query()->count(),
+            'jumlah_peminjam'=>Peminjam::query()->count(),
+            'peminjaman'=>Peminjaman::query()
+                ->with(['peminjamPerson'])
+                ->latest('kode_peminjaman')
+                ->limit(10)->get(),
+            'pengembalian'=>Pengembalian::query()
+                ->with(['peminjamPerson'])
+                ->latest('kode_pengembalian')
+                ->limit(10)->get(),
+
+        ]);
     }
 
     public function siswa()

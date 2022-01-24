@@ -1,21 +1,4 @@
 <x-metronics-layout>
-    <div class="row">
-        <div class="col-4">
-            <x-mikro.card-custom :title="'Jumlah Koleksi Buku'" >
-                <p class="text-center">{{$jumlah_koleksi_buku}} Pcs</p>
-            </x-mikro.card-custom>
-        </div>
-        <div class="col-4">
-            <x-mikro.card-custom :title="'Jumlah Pegawai'" >
-                <p class="text-center">{{$jumlah_pegawai}} Orang</p>
-            </x-mikro.card-custom>
-        </div>
-        <div class="col-4">
-            <x-mikro.card-custom :title="'Jumlah Peminjam'" >
-                <p class="text-center">{{$jumlah_peminjam}} Orang</p>
-            </x-mikro.card-custom>
-        </div>
-    </div>
     <div class="row mt-5">
         <div class="col-6">
             <x-mikro.card-custom :title="__('Peminjaman Buku')">
