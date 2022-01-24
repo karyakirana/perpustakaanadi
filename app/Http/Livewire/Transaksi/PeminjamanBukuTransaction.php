@@ -91,6 +91,7 @@ class PeminjamanBukuTransaction extends Component
         try {
             $peminjaman = Peminjaman::create([
                 'kode_peminjaman'=>(new PeminjamanRepository())->kodePeminjaman(),
+                'status'=>'pending',
                 'peminjam'=>$this->customerId,
                 'tgl_pinjam'=>tanggalan_database_format($this->tglPinjam, 'd M Y'),
                 'tgl_kembali'=>tanggalan_database_format($this->tglKembali, 'd M Y'),

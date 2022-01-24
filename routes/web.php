@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function (){
 
     Route::get('transaksi/peminjaman', [\App\Http\Controllers\Transaksi\PeminjamanBukuController::class, 'index'])->name('peminjaman.index');
     Route::get('transaksi/peminjaman/new', [\App\Http\Controllers\Transaksi\PeminjamanBukuController::class, 'create'])->name('peminjamannew.index');
+    Route::get('transaksi/peminjaman/edit/{id}', [\App\Http\Controllers\Transaksi\PeminjamanBukuController::class, 'edit']);
 
     Route::get('transaksi/pengembalian', [\App\Http\Controllers\Transaksi\PengembalianController::class, 'index'])->name('pengembalian.index');
     Route::get('transaksi/pengembalian/new', [\App\Http\Controllers\Transaksi\PengembalianController::class, 'create'])->name('pengembaliannew.index');

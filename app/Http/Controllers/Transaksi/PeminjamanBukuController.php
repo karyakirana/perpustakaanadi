@@ -17,6 +17,11 @@ class PeminjamanBukuController extends Controller
         return view('pages.peminjaman-transaksi');
     }
 
+    public function edit($id)
+    {
+        //
+    }
+
     public function approved()
     {
         //
