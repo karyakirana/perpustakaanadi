@@ -47,7 +47,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--begin::Header Mobile-->
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
     <!--begin::Logo-->
-    <a href="index.html">
+    <a href="{{url('/').'/dashboard'}}">
         <img alt="Logo" src="/assets/media/logos/logo-light.png" />
     </a>
     <!--end::Logo-->

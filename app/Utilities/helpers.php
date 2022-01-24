@@ -14,6 +14,13 @@ if (!function_exists('tanggalan_format')){
     }
 }
 
+if (!function_exists('tanggalan_format2')){
+    function tanggalan_format2($tanggal)
+    {
+        return \Carbon\Carbon::parse($tanggal)->format('d-M-Y');
+    }
+}
+
 if (!function_exists('tanggalan_database_format')){
     function tanggalan_database_format($tanggal, $format)
     {

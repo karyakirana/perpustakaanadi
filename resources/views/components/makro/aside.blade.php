@@ -3,7 +3,7 @@
     <div class="brand flex-column-auto" id="kt_brand">
         <!--begin::Logo-->
         <a href="{{url('/dashboard')}}" class="brand-logo">
-            <img alt="Logo" src="/assets/media/logos/logo-light.png" />
+            Sistem Informasi Perpustakaan
         </a>
         <!--end::Logo-->
         <!--begin::Toggle-->
@@ -206,14 +206,6 @@
                                         <span></span>
                                     </i>
                                     <span class="menu-text">Manajemen Stock</span>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ (request()->is('manajemen/stock/perubahan')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                                <a href="/manajemen/stock/perubahan" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Stock Perubahan</span>
                                 </a>
                             </li>
                             <li class="menu-item {{ (request()->is('manajemen/inventaris')) ? 'menu-item-active' : '' }}" aria-haspopup="true">

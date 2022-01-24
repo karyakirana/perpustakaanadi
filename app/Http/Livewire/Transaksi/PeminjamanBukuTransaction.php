@@ -83,7 +83,6 @@ class PeminjamanBukuTransaction extends Component
     public function storeAll()
     {
         $this->validate([
-            'customerId'=>'required',
             'tglPinjam'=>'required|date',
             'tglKembali'=>'required|date',
         ]);
@@ -92,9 +91,10 @@ class PeminjamanBukuTransaction extends Component
             $peminjaman = Peminjaman::create([
                 'kode_peminjaman'=>(new PeminjamanRepository())->kodePeminjaman(),
                 'status'=>'pending',
-                'peminjam'=>$this->customerId,
-                'tgl_pinjam'=>tanggalan_database_format($this->tglPinjam, 'd M Y'),
-                'tgl_kembali'=>tanggalan_database_format($this->tglKembali, 'd M Y'),
+                'peminjam'=>Peminjam::query()
+                    ->whereRelation('users', 'id', '=', \Auth::id())->first()->id,
+                'tgl_pinjam'=>tanggalan_database_format($this->tglPinjam, 'd-M-Y'),
+                'tgl_kembali'=>tanggalan_database_format($this->tglKembali, 'd-M-Y'),
                 'user_id'=>auth()->id(),
                 'total_bayar'=>0,
                 'keterangan'=>$this->keterangan,
@@ -112,7 +112,7 @@ class PeminjamanBukuTransaction extends Component
             }
             DB::commit();
             session()->flash('message', 'Data Sudah Disimpan.');
-            return redirect()->to('/peminjaman');
+            return redirect()->to('/transaksi/peminjaman');
         } catch (ModelNotFoundException $e){
             DB::rollBack();
             session()->flash('message', 'Data Tidak Bisa Disimpan.<br>Keterangan : <br>'.$e);
@@ -121,8 +121,8 @@ class PeminjamanBukuTransaction extends Component
 
     public function mount()
     {
-        $this->tglPinjam = tanggalan_format(now('Asia/Jakarta'));
-        $this->tglKembali = tanggalan_format(now('Asia/Jakarta')->addDay(3));
+        $this->tglPinjam = tanggalan_format2(now('Asia/Jakarta'));
+        $this->tglKembali = tanggalan_format2(now('Asia/Jakarta')->addDay(3));
     }
 
     public function render()

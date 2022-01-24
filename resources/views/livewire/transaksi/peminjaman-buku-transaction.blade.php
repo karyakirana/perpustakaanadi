@@ -23,20 +23,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-4 col-form-label ml-3">Peminjam</label>
-                                <div class="col-7">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control @error('customerId') is-invalid @enderror" wire:model.defer="customer" readonly>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button" onclick="showPeminjam()">Pilih</button>
-                                        </div>
-                                        @error('customerId')
-                                        <span class="invalid-feedback">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-4 col-form-label ml-3">Tgl Pinjam</label>
                                 <div class="col-7">
                                     <x-nano.input-datepicker
@@ -55,12 +41,6 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label ml-3">Pembuat</label>
-                                <div class="col-7">
-                                    <input type="text" class="form-control" value="{{auth()->user()->name}}" readonly>
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label class="col-4 col-form-label ml-3">Tgl Kembali</label>
                                 <div class="col-7">

@@ -34,6 +34,10 @@ class DaftarPeminjamanBuku extends DataTableComponent
 
     public function query(): Builder
     {
+        if (\Auth::user()->role == 'peminjam'){
+            return Peminjaman::query()
+                ->where('user_id', \Auth::id());
+        }
         return Peminjaman::query();
     }
 
