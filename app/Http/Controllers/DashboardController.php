@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public function index()
     {
         // dashboard admin
-        if (Auth::user()->role != 'pegawai' | Auth::user()->role != 'admin'){
+        if (Auth::user()->role != 'pegawai'){
             return redirect()->to('dashboard/'.Auth::user()->role);
         }
         return view('pages.dashboard');
