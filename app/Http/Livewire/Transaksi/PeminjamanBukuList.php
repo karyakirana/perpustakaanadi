@@ -85,6 +85,11 @@ class PeminjamanBukuList extends Component
         Peminjaman::where('id', $id)->delete();
     }
 
+    public function pengembalian()
+    {
+        return redirect()->to('/transaksi/pengembalian');
+    }
+
     public function render()
     {
         return view('livewire.transaksi.peminjaman-buku-list',[

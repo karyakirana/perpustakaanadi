@@ -57,4 +57,9 @@ class DaftarPeminjamanBuku extends DataTableComponent
             'status'=>'approved'
         ]);
     }
+
+    public function pengembalian()
+    {
+        return redirect()->to('transaksi/pengembalian');
+    }
 }

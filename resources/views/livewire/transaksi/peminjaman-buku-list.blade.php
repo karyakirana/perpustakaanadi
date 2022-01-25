@@ -32,7 +32,7 @@
                                 <td class="text-center table-responsive">
                                     <a href="#" wire:click="edit({{$row->id}})" class="btn btn-sm btn-text-primary btn-hover-primary btn-icon flaticon2-pen" title="edit">
                                     </a>
-                                    <a href="#" wire:click="removeData({{$row->id}})" class="btn btn-sm btn-text-danger btn-icon btn-hover-danger ki ki-solid-minus">
+                                    <a href="#" wire:click="pengembalian({})" class="btn btn-sm btn-text-danger btn-icon btn-hover-danger ki ki-solid-minus">
                                     </a>
                                 </td>
                             </tr>

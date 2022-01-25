@@ -20,7 +20,7 @@
     </a>
     @endcan
     @can('peminjam')
-    <a href="#" wire:click="removeData({{$row->id}})" class="btn btn-sm btn-text-danger btn-icon btn-hover-danger ki ki-solid-minus">
+    <a href="#" wire:click="pengembalian()" class="btn btn-sm btn-text-danger btn-icon btn-hover-danger ki ki-solid-minus">
     </a>
     @endcan
 </x-livewire-tables::bs4.table.cell>
