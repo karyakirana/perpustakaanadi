@@ -2,6 +2,7 @@
 
 namespace App\Models\Transaksi;
 
+use App\Models\Master\Buku;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +17,9 @@ class PeminjamanDetail extends Model
         'harga_sewa',
         'sub_total',
     ];
+
+    public function buku()
+    {
+        return $this->belongsTo(Buku::class);
+    }
 }

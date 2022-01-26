@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Table;
 
 use App\Models\Transaksi\Peminjaman;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -34,9 +35,10 @@ class DaftarPeminjamanBuku extends DataTableComponent
 
     public function query(): Builder
     {
+        $peminjam = User::query()->find(\Auth::id())->userable_id;
         if (\Auth::user()->role == 'peminjam'){
             return Peminjaman::query()
-                ->where('user_id', \Auth::id());
+                ->where('peminjam', $peminjam);
         }
         return Peminjaman::query();
     }
@@ -60,6 +62,6 @@ class DaftarPeminjamanBuku extends DataTableComponent
 
     public function pengembalian()
     {
-        return redirect()->to('transaksi/pengembalian');
+        return redirect()->to('transaksi/pengembalian/new');
     }
 }

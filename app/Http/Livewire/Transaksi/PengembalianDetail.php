@@ -4,9 +4,13 @@ namespace App\Http\Livewire\Transaksi;
 
 use App\Http\Repositories\Transaksi\PengembalianRepository;
 use App\Models\Master\Buku;
+use App\Models\Master\Denda;
 use App\Models\Master\Peminjam;
+use App\Models\Transaksi\Peminjaman;
 use App\Models\Transaksi\Pengembalian;
 use App\Models\Transaksi\PengembalianDetail as PengembalianDetailModel;
+use App\Models\User;
+use DateTime;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -17,6 +21,8 @@ class PengembalianDetail extends Component
     public $detailPengembalian = [];
     public $idBuku, $kodeBuku, $deskripsiBuku, $jumlahBuku;
     public $update, $indexItem;
+
+    public $idPeminjaman;
 
     protected $listeners = ['getItemToForm', 'getPeminjamToForm'];
 
@@ -81,18 +87,18 @@ class PengembalianDetail extends Component
     {
         $this->validate([
             'customerId'=>'required',
-            'tglPinjam'=>'required|date',
-            'tglKembali'=>'required|date',
+            'tglPinjam'=>'required',
+            'tglKembali'=>'required',
         ]);
         DB::beginTransaction();
         try {
             $pengembalian = Pengembalian::create([
                 'kode_pengembalian' => (new PengembalianRepository())->kodePengembalian(),
                 'peminjam' => $this->customerId,
-                'tgl_pinjam' => tanggalan_database_format($this->tglPinjam, 'd M Y'),
-                'tgl_kembali' => tanggalan_database_format($this->tglKembali, 'd M Y'),
+                'tgl_pinjam' => tanggalan_database_format($this->tglPinjam, 'd-M-Y'),
+                'tgl_kembali' => tanggalan_database_format($this->tglKembali, 'd-M-Y'),
                 'user_id' => auth()->id(),
-                'total_bayar' => 0,
+                'total_bayar' => array_sum(array_column($this->detailPengembalian, 'denda')),
                 'keterangan' => $this->keterangan,
                 ]);
             foreach ($this->detailPengembalian as $row)
@@ -105,19 +111,60 @@ class PengembalianDetail extends Component
                     'sub_total'=>0,
                 ]);
             }
+            Peminjaman::find($this->idPeminjaman)->update([
+                'status'=>'dikembalikan'
+            ]);
             DB::commit();
             session()->flash('message', 'Data Sudah Disimpan');
-            return redirect()->to('/pengembalian');
+            return redirect()->to('transaksi/pengembalian');
         } catch (ModelNotFoundException $e){
             DB::rollBack();
             session()->flash('message', 'Data Tidak Bisa Disimpan .<br>Keterangan : <br>'.$e);
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function mount()
     {
-        $this->tglPinjam = tanggalan_format(now('Asia/Jakarta'));
-        $this->tglKembali = tanggalan_format(now('Asia/Jakarta')->addDay(5));
+        $this->tglPinjam = tanggalan_format2(now('Asia/Jakarta'));
+        $this->tglKembali = tanggalan_format2(now('Asia/Jakarta')->addDay(5));
+
+        $denda = Denda::query()->latest()->first()->nominal ?? 0;
+
+        $peminjam = User::query()->find(\Auth::id())->userable_id;
+
+        $peminjaman = Peminjaman::query()
+            ->with(['peminjamanBukuDetail', 'peminjamanBukuDetail.buku'])
+            ->where('peminjam', $peminjam)
+            ->where('status', 'approved');
+
+        if ($peminjaman->exists())
+        {
+            foreach ($peminjaman->get() as $item){
+                // item detail
+                foreach ($item->peminjamanBukuDetail as $value){
+                    $tglKembali= new DateTime($item->tgl_kembali);
+                    $tglSekarang = new DateTime('now');
+                    $selisih_tgl = (int) $tglKembali->diff($tglSekarang)->d;
+                    $this->detailPengembalian [] = [
+                        'id'=>$value->buku_id,
+                        'kodeBuku'=>$value->buku->kode_buku,
+                        'judulBuku'=>$value->buku->judul,
+                        'jumlah'=>$value->jumlah,
+                        'tglkembali'=>$item->tgl_kembali,
+                        'denda'=>$denda*$selisih_tgl,
+                    ];
+                }
+            }
+            $peminjaman = $peminjaman->first();
+            $this->idPeminjaman = $peminjaman->id;
+            $this->customerId = $peminjaman->peminjam;
+            $this->customer = $peminjaman->peminjamPerson->nama;
+            $this->tglPinjam = tanggalan_format2($peminjaman->tgl_pinjam);
+            $this->tglKembali = tanggalan_format2($peminjaman->tgl_kembali);
+        }
     }
 
 

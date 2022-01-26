@@ -18,7 +18,7 @@
             </x-slot>
 
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <form class="form">
                         <input type="text" hidden wire:model.defer="customerId">
                         <div class="row">
@@ -83,19 +83,21 @@
                             <x-atom.th-center :width="'10%'">NO</x-atom.th-center>
                             <x-atom.th-center :width="'30%'">Item</x-atom.th-center>
                             <x-atom.th-center :width="'10%'">Jumlah</x-atom.th-center>
-                            <x-atom.th-center :width="'15%'">Action</x-atom.th-center>
+                            <x-atom.th-center :width="'10%'">Denda</x-atom.th-center>
+{{--                            <x-atom.th-center :width="'15%'">Action</x-atom.th-center>--}}
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($detailPengembalian as $index => $item)
                             <tr>
-                                <x-atom.td-format :align="'center'">{{ $loop->iteration }}</x-atom.td-format>
+                                <x-atom.td-format :align="'center'">{{ $item['kodeBuku'] }}</x-atom.td-format>
                                 <x-atom.td-format>{{ $item['judulBuku'] }}</x-atom.td-format>
                                 <x-atom.td-format :align="'center'">{{ $item['jumlah'] }}</x-atom.td-format>
-                                <x-atom.td-format :align="'center'">
-                                    <button class="btn btn-clean" wire:click="editItemTable({{$index}})">Edit</button>
-                                    <button class="btn btn-clean" wire:click="deleteItem({{$index}})">Delete</button>
-                                </x-atom.td-format>
+                                <x-atom.td-format :align="'center'">{{ $item['denda'] }}</x-atom.td-format>
+{{--                                <x-atom.td-format :align="'center'">--}}
+{{--                                    <button class="btn btn-clean" wire:click="editItemTable({{$index}})">Edit</button>--}}
+{{--                                    <button class="btn btn-clean" wire:click="deleteItem({{$index}})">Delete</button>--}}
+{{--                                </x-atom.td-format>--}}
                             </tr>
                         @empty
                             <tr>
@@ -104,39 +106,6 @@
                         @endforelse
                         </tbody>
                     </table>
-                </div>
-                <div class="col-md-4">
-                    <div class="border border-1">
-                        <form>
-                            <input type="text" hidden wire:model.defer="idBuku">
-                            <div class="form-group row mt-4">
-                                <label class="col-4 col-form-label ml-3">ID</label>
-                                <div class="col-7">
-                                    <input type="text" class="form-control" wire:model.defer="kodeBuku" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label ml-3">Item</label>
-                                <div class="col-7">
-                                    <input type="text" class="form-control" wire:model.defer="deskripsiBuku" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label ml-3">Jumlah</label>
-                                <div class="col-7">
-                                    <input type="text" class="form-control" wire:model.defer="jumlahBuku">
-                                </div>
-                            </div>
-                            <div class="form-group text-center mt-5">
-                                <button type="button" class="btn btn-primary" onclick="showModalBuku()">Add Produk</button>
-                                @if($update)
-                                    <button class="btn btn-success" type="button" wire:click="updateItem">Update</button>
-                                @else
-                                    <button class="btn btn-success" type="button" wire:click="setItemToTable">Save</button>
-                                @endif
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
 
