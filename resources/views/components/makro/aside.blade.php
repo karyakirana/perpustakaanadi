@@ -148,6 +148,7 @@
 													<span class="menu-text">Peminjaman</span>
 												</span>
                             </li>
+                            @can('pegawai')
                             <li class="menu-item {{ (request()->is('transaksi/denda')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                 <a href="/transaksi/denda" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
@@ -156,6 +157,7 @@
                                     <span class="menu-text">Denda</span>
                                 </a>
                             </li>
+                            @endcan
                             <li class="menu-item {{ (request()->is('transaksi/peminjaman')) ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                 <a href="/transaksi/peminjaman" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
