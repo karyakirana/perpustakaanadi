@@ -24,6 +24,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
+                                    <label class="col-4 col-form-label ml-3">Tgl Pinjam</label>
+                                    <div class="col-7">
+                                        <x-nano.input-datepicker
+                                            :hasError="$errors->has('tglKembali')"
+                                            wire:model.defer="tglPinjam" id="tglPinjam"/>
+                                        @error('tglPinjam')
+                                        <span class="invalid-feedback">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-4 col-form-label ml-3">Peminjam</label>
                                     <div class="col-7">
                                         <div class="input-group">
@@ -38,17 +49,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-4 col-form-label ml-3">Tgl Pinjam</label>
-                                    <div class="col-7">
-                                        <x-nano.input-datepicker
-                                            :hasError="$errors->has('tglKembali')"
-                                            wire:model.defer="tglPinjam" id="tglPinjam"/>
-                                        @error('tglPinjam')
-                                        <span class="invalid-feedback">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-4 col-form-label ml-3">Keterangan</label>
                                     <div class="col-7">
                                         <input type="text" class="form-control" wire:model.defer="keterangan">
@@ -56,12 +56,6 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="col-4 col-form-label ml-3">Pembuat</label>
-                                    <div class="col-7">
-                                        <input type="text" class="form-control" value="{{auth()->user()->name}}" readonly>
-                                    </div>
-                                </div>
                                 <div class="form-group row">
                                     <label class="col-4 col-form-label ml-3">Tgl Kembali</label>
                                     <div class="col-7">

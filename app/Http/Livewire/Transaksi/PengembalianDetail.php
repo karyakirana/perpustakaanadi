@@ -10,6 +10,7 @@ use App\Models\Transaksi\Peminjaman;
 use App\Models\Transaksi\Pengembalian;
 use App\Models\Transaksi\PengembalianDetail as PengembalianDetailModel;
 use App\Models\User;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
@@ -146,8 +147,9 @@ class PengembalianDetail extends Component
                 // item detail
                 foreach ($item->peminjamanBukuDetail as $value){
                     $tglKembali= new DateTime($item->tgl_kembali);
-                    $tglSekarang = new DateTime('now');
-                    $selisih_tgl = (int) $tglKembali->diff($tglSekarang)->d;
+                    $tglSekarang = new DateTime(Carbon::now('Asia/Jakarta'));
+                    $selisih_tgl = (int) $tglSekarang->diff($tglKembali)->d;
+//                    dd($selisih_tgl);
                     $this->detailPengembalian [] = [
                         'id'=>$value->buku_id,
                         'kodeBuku'=>$value->buku->kode_buku,

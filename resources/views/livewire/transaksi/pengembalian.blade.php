@@ -4,7 +4,7 @@
             <div class="card-title">Pengembalian Buku</div>
             <div class="card-toolbar">
                 <div class="card-toolbar">
-                    <a href="{{ route('pengembaliannew.index') }}" class="btn btn-primary" type="button">New Add</a>
+{{--                    <a href="{{ route('pengembaliannew.index') }}" class="btn btn-primary" type="button">New Add</a>--}}
                 </div>
             </div>
         </div>
@@ -30,10 +30,10 @@
                                 <td class="text-center italic" >{{tanggalan_format($row->tgl_kembali)}}</td>
                                 <td class="text-center italic" >{{$row->keterangan}}</td>
                                 <td class="text-center table-responsive">
-                                    <a href="#" wire:click="edit({{$row->id}})" class="btn btn-sm btn-text-primary btn-hover-primary btn-icon flaticon2-pen" title="edit">
-                                    </a>
-                                    <a href="#" wire:click="removeData({{$row->id}})" class="btn btn-sm btn-text-danger btn-icon btn-hover-danger ki ki-solid-minus">
-                                    </a>
+{{--                                    <a href="#" wire:click="edit({{$row->id}})" class="btn btn-sm btn-text-primary btn-hover-primary btn-icon flaticon2-pen" title="edit">--}}
+{{--                                    </a>--}}
+{{--                                    <a href="#" wire:click="removeData({{$row->id}})" class="btn btn-sm btn-text-danger btn-icon btn-hover-danger ki ki-solid-minus">--}}
+{{--                                    </a>--}}
                                 </td>
                             </tr>
                         @empty
